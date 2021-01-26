@@ -1,18 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+// Material-UI
 import { Container, Typography, Button, Grid } from "@material-ui/core";
+
+// Components
 import CartItem from "./CartItem/CartItem";
 
+// Styling
 import useStyle from "./style";
 
+// Cart Component to display every item the user added to their cart.
 function Cart({
    cart,
    handleUpdateCardQty,
    handleRemoveFromCart,
    handleEmptyCart,
 }) {
+   // assigning styling to variable
    const classes = useStyle();
 
+   // Generate empty cart
    const EmptyCart = () => (
       <Typography variant="subtitle1">
          You have no items in your cart,
@@ -23,6 +31,7 @@ function Cart({
       </Typography>
    );
 
+   // Generate cart with all the user added items
    const FilledCart = () => (
       <>
          <Grid container spacing={3}>
@@ -56,6 +65,8 @@ function Cart({
                      type="button"
                      variant="contained"
                      color="primary"
+                     component={Link}
+                     to="/checkout"
                   >
                      Checkout
                   </Button>
@@ -65,6 +76,7 @@ function Cart({
       </>
    );
 
+   // wait for page to grab cart items
    if (!cart.line_items) return "Loading...";
 
    return (
